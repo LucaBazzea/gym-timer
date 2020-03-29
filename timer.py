@@ -18,7 +18,21 @@ while True:
 while True:
     try:
         hours = int(input("Hours: "))
+        break
+    except:
+        print("Input numbers only")
+        print("---")
+
+while True:
+    try:
         minutes = int(input("Minutes: "))
+        break
+    except:
+        print("Input numbers only")
+        print("---")
+
+while True:
+    try:
         seconds = int(input("Seconds: "))
         break
     except:
@@ -33,13 +47,23 @@ while True:
 
 while seconds > -1:
     os.system("cls")
-    print(f"H:{hours}M:{minutes}S:{seconds}")
+    time_left = str(hours).zfill(2) + ":" + str(minutes).zfill(2) + ":" + str(seconds).zfill(2)
+    print(time_left)
+    
+    if seconds < 1 and minutes >= 1:
+        minutes -= 1
+        seconds = 59
+
+    if minutes < 1 and hours >= 1:
+        hours -= 1
+        minutes = 59
+
     time.sleep(1)
     seconds -= 1
     os.system("cls")
 
 
-# Go again or new clock
+# Go again, new clock or exit
 
 
 
