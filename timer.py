@@ -1,10 +1,6 @@
 import time
 import os
 
-hours = int(0) 
-minutes = int(0)
-seconds = int(0)
-
 # Choose how many rounds
 while True:
     try:
@@ -41,25 +37,28 @@ while True:
 
 # Choose rest, rest must be > 3 sec so that it can rest -= 3
 
-'''for i in range(seconds):
-    print("seconds: " + str(seconds - i))
-    time.sleep(1)'''
-
-while seconds > -1:
+while True:
     os.system("cls")
+    
     time_left = str(hours).zfill(2) + ":" + str(minutes).zfill(2) + ":" + str(seconds).zfill(2)
     print(time_left)
     
-    if seconds < 1 and minutes >= 1:
-        minutes -= 1
-        seconds = 59
-
-    if minutes < 1 and hours >= 1:
+    time.sleep(1)
+    
+    if minutes == 0  and seconds == 0 and hours >= 1:
         hours -= 1
         minutes = 59
 
-    time.sleep(1)
+    if seconds == 0 and minutes >= 1:
+        minutes -= 1
+        seconds = 59
+
     seconds -= 1
+
+    if seconds < 0 and minutes == 0 and hours == 0:
+        print("time's up")
+        break
+    
     os.system("cls")
 
 
