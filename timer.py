@@ -36,6 +36,13 @@ def menu():
         except:
             print("Input numbers only")
             print("---")
+
+    saveFile = open("gym-timer/saveFile.txt","w")
+    saveFile.write(str(round_num))
+    saveFile.write(str(hours))
+    saveFile.write(str(minutes))
+    saveFile.write(str(seconds))
+    saveFile.close()
     
     return round_num, hours, minutes, seconds
 
@@ -66,8 +73,6 @@ def clock():
         if seconds < 0 and minutes == 0 and hours == 0 and round_num == 0:
             print("time's up")
             break
-
-        os.system("cls")
 
 clock()
 
