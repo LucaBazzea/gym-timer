@@ -1,83 +1,28 @@
 import time
-import os
 
-def menu():
+# input time, rounds and rest
+# Add some Try Except
+# Convert minutes to seconds
+ti = int(input("Enter the time in seconds: "))
+ro = int(input("How many rounds would you like?: "))
+re = int(input("How long do you want the rest to be?: "))
 
-    # Choose how many rounds
-    while True:
-        try:
-            round_num = int(input("Number of rounds: "))
-            break
-        except:
-            print("Input numbers only")
-            print("---")
-
-    # Choose duration
-    while True:
-        try:
-            hours = int(input("Hours: "))
-            break
-        except:
-            print("Input numbers only")
-            print("---")
-
-    while True:
-        try:
-            minutes = int(input("Minutes: "))
-            break
-        except:
-            print("Input numbers only")
-            print("---")
-
-    while True:
-        try:
-            seconds = int(input("Seconds: "))
-            break
-        except:
-            print("Input numbers only")
-            print("---")
-
-    saveFile = open("gym-timer/saveFile.txt","w")
-    saveFile.write(str(round_num))
-    saveFile.write(str(hours))
-    saveFile.write(str(minutes))
-    saveFile.write(str(seconds))
-    saveFile.close()
+def countdown(t): 
     
-    return round_num, hours, minutes, seconds
+    while t: 
+        mins, secs = divmod(t, 60) 
+        timer = '{:02d}:{:02d}'.format(mins, secs) 
+        print(timer, end="\r") 
+        time.sleep(1) 
+        t -= 1
+  
+while ro >= 1:
 
-# Choose rest, rest must be > 3 sec so that it can rest -= 3
+    countdown(ti)
+    print("--Round Over--\n")
 
-def clock():
+    if re >= 1 and ro >= 2:
+        countdown(re)
+        print("--Rest Over--\n")
 
-    round_num, hours, minutes, seconds = menu()
-
-    while True:
-        os.system("cls")
-        
-        time_left = str(hours).zfill(2) + ":" + str(minutes).zfill(2) + ":" + str(seconds).zfill(2)
-        print(time_left)
-        
-        time.sleep(1)
-        
-        if minutes == 0  and seconds == 0 and hours >= 1:
-            hours -= 1
-            minutes = 59
-
-        if seconds == 0 and minutes >= 1:
-            minutes -= 1
-            seconds = 59
-
-        seconds -= 1
-
-        if seconds < 0 and minutes == 0 and hours == 0 and round_num == 0:
-            print("time's up")
-            break
-
-clock()
-
-# Go again, new clock or exit
-
-# Could be cool to make this a SBG themed clock with motivational quotes from SBG athletes
-
-# Create presets
+    ro -= 1
